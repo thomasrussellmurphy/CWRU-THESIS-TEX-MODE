@@ -1,0 +1,22 @@
+\chapter{Bibliography}
+
+The preparation of the bibliography\index{bibliography} is not very
+difficult. Please refer to \cite[pp:140-147]{lamport86} to make a {\tt
+thesis.bib}, and follow the following guidelines:
+
+\begin{enumerate}
+  \item prepare {\tt thesis.bib} as described in \cite{lamport86}
+  \item make sure that the {\tt thesis.tex} contains a line 
+     $\backslash$bibliography\{thesis\} after chapters and appendix, if not
+    \subitem add the line {\bf ``$\backslash$bibliography \{thesis\}''}
+	after the chapters and appendcies, and before the index
+  \item run {\tt thesis.tex} through \LaTeX once
+  \item at prompt, type {\bf ``bibtex thesis''} {\tt (NO EXTENSION)}; this 
+	will generate the {\tt thesis.bbl}
+  \item if you intend to include the Index, refer to Chapter~\ref{make-index}
+	 Make-Index
+  \item run {\tt thesis.tex} throught \LaTeX twice, or three times to be on
+	the safe side
+  \item make {\bf thesis.alw} or {\bf thesis.ps} as you need
+  \item {\bf Be Happy You Did The Job Right}
+\end{enumerate}

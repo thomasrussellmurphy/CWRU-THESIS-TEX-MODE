@@ -1,0 +1,48 @@
+
+\chapter{INTRODUCTION}
+\pagestyle{headings}   % DONNOT MODIFY THIS LINE
+\pagenumbering{arabic} % DONNOT MODIFY THIS LINE
+\label{introduction}
+%-------------------------- YOU MAY START BELOW THIS LINE -------------
+
+While preparing my dissertation I went through a lot of pain and
+several visits to the graduate office for format of the dissertation.
+I decided to make a style file so that every graduate student of Case
+Western Reserve University can use it and have less pain. I will try
+my best to explain each thing clearly.
+
+I have written my comments in uppercase in the {\tt thesis-sample.tex}
+file.
+
+\section{From Title Page to the First Chapter}
+You have to modify the title, abstract, dedication, and acknowledgment
+pages of this document by putting your information in. The committee
+page is provided by the graduate office; if want to make your own,
+fill in appropriate information in the {\tt thesis-sample.tex} file;
+remover or insert \% sign before the {\tt
+$\backslash$makecommitteepage} command, otherwise.
+
+\section{First Chapter}
+
+If the {\bf INTRODUCTION} is the first chapter of the document after
+the tables of contents\index{TOC}, figures, and tables, then you need
+not change the top 4 lines in this chapter, which are as follows:\\
+
+\begin{verbatim}
+\chapter{INTRODUCTION}
+\pagestyle{headings}   % DO NOT MODIFY THIS LINE
+\pagenumbering{arabic} % DO NOT MODIFY THIS LINE
+\label{introduction}
+\end{verbatim}
+
+Otherwise, you can change only the name of the chapter and the label:
+
+Take care not to modify any other part of these lines. The reason is
+that, if you have more than one page of the list before this chapter,
+it will not print the page number on the bottom of the page for the
+last page of that table if that table has more than one pages; it is
+required by the Graduate Office\index{graduate office} that all page
+numbering\index{numbering} before the first chapter of the thesis be
+in roman\index{roman} numeral and at the bottom center of the page,
+and that the rest of the document pages should be numbered with
+arabic\index{arabic} numerals.

@@ -1,0 +1,186 @@
+%% Define all the pieces that go on the title page and the abstract.
+
+% \title and \author already exist
+
+\def\prevdegrees#1{\gdef\@prevdegrees{#1}}
+\def\@prevdegrees{}
+
+\def\department#1{\gdef\@department{#1}}
+
+% If you are getting two degrees, use \and between the names.
+\def\degree#1{\setbox0\hbox{#1}	 %for side effect of setting \@degreeword
+  \gdef\@degree{#1}}
+
+% \and is used inside the \degree argument to separate two degrees
+\def\and{\gdef\@degreeword{degrees} \par and \par}
+\def\@degreeword{degree}
+
+% If there is no \copyrightnotice command, it is assumed that CWRU
+% holds the copyright.  This commands adds the copyright symbol to the
+% beginning, and puts the standard permission notice below.
+\def\copyrightnotice#1{\copyrightnoticetext{\copyright\ #1\par\permission}}
+
+% Occasionally you will need to exactly specify the text of the 
+% copyright notice.  The \copyrightnoticetext command is then useful.
+\long\def\copyrightnoticetext#1{\gdef\@copyrightnotice{#1}}
+\def\@copyrightnotice{\copyright\ \cwru\ \@degreeyear}
+
+\def\thesisdate#1{\gdef\@thesisdate{#1}}
+
+% typically just a month and year
+\def\degreemonth#1{\gdef\@degreemonth{#1}}
+\def\degreeyear#1{\gdef\@degreeyear{#1}}
+
+% Usage: \committee{name}{title}
+%        \committeechair{name}{title}
+
+% since there can be more than one committee,
+% we build the appropriate boxes for the committeepage and
+% the abstractpage as the user makes multiple calls
+% to \committee
+\newbox\@titlecommittee 	\newbox\@abstractadvisor
+\newbox\@titleadvisor
+
+\def\majoradvisor#1{\gdef\@majoradvisor{#1}}
+
+%++++++++++++++++++++++++
+% The \advisor command takes an optional argument in case you
+% want to label a person other than "Thesis Advisor".  For example,
+% if you have a co-advisor other than the thesis advisor.
+%\def\committee{\@ifnextchar[{\@committee}{\@committee[Thesis Co-Advisor]}}
+
+\def\advisor{\@ifnextchar[{\@advisor}{\@advisor[]}}
+\def\@advisor[#1]#2#3
+  {\setbox\@titleadvisor\vbox{\unvbox\@titleadvisor 
+  \vskip 10pt plus 1fil minus 1fil
+  \def\baselinestretch{1}}
+  \setbox\@abstractadvisor\vbox{\unvbox\@abstractadvisor
+  \vskip\baselineskip \def\baselinestretch{1}\@normalsize 
+  \par\noindent #1 Advisor: #2\\Title: #3}}
+%++++++++++++++++++++++++
+% thesis committeechair, not the department chairperson
+\def\committeechair#1#2{\gdef\@committeechairname{#1}\gdef
+\@committeechairtitle{#2}}
+%++++++++++++++++++++++++
+% The \committee command takes an optional argument in case you
+% want to label a person other than " Committee Member".  For example,
+% if committee chair is other than your thesis advisor. Rule of thumb
+% is that the chair of the committee is the thesis advisor (major).
+%\def\committee{\@ifnextchar[{\@committee}{\@committee[Thesis Advisor]}}
+
+\def\committee{\@ifnextchar[{\@committee}{\@committee[]}}
+\def\@committee[#1]#2#3{\setbox\@titlecommittee\vbox
+  {\unvbox\@titlecommittee \vskip 40pt plus 1fil minus 1fil
+  \def\baselinestretch{1}%\large
+  \signature{Committee}{{\bf #2}\\#3\\#1}}}
+%++++++++++++++++++++++++++++Committee Page+++++++++++++++
+\def\makecommitteepage{\begin{committeepage}
+{\def\baselinestretch{1}\large\bf \@title \par\par}
+			%by\par
+			%{\bf \@author}
+			%\par
+			%\@prevdegrees
+\par
+			%{\bf \@degree}
+			%\par at the
+			%\par
+\CWRU\\ GRADUATE STUDIES\\
+			%\@degreemonth\ \@degreeyear
+\@thesisdate\\
+\par
+{\large We hereby approve the thesis of\\ 
+	\@author\\
+	candidate for the {\bf \@degree }}\\
+	degree. $\star$\\
+%\par
+%\vskip \baselineskip
+%\signature{Signature of Author}{\@department \\ \@thesisdate}
+\par
+\vskip 20pt
+\signature{Committee Chair}{{\bf \@committeechairname} \\ 
+			\@committeechairtitle}
+\unvbox\@titlecommittee
+\par
+
+{\large$\star$We also certify that written approval has been obtained for any 
+	proprietary material contained therein.}
+\vspace*{0.5in}
+\end{committeepage}}
+%=========================End Committee Page ==========
+%++++++++++++++++++++++++++++Title Page+++++++++++++++
+\def\maketitlepage{\begin{titlepage}
+\thispagestyle{empty}
+{\def\baselinestretch{1.2}\Large\bf \@title \par}
+\vspace{0.75in}
+\centerline{\Large by}
+\bigskip
+\bigskip
+\centerline{\Large \bf \@author}
+\vfill
+\centerline{\large Submitted in Partial Fulfillment of the Requirements}
+\bigskip
+\centerline{\large for the Degree of}
+\bigskip
+\centerline{\large \bf \@degree}
+\vfill
+\centerline{\large \bf Advisor: {\bf \@majoradvisor}}
+\bigskip
+\bigskip
+\centerline{\Large \@department}
+\bigskip
+\centerline{\Large \cwru}
+%\bigskip
+%\centerline{\Large Cleveland, Ohio 44106}
+\bigskip
+\centerline{\Large \@degreemonth\ \@degreeyear}
+\vspace*{0.5in}
+\end{titlepage}}
+%+++++++++++++++++++++++end Title Page+++++++++++++++++++++++++++++
+
+% this environment should probably be called abstract,
+% but we want people to also be able to get at the more
+% basic abstact environment
+%
+\def\abstractheader{\newpage
+\begin{center}{\large{\bf \@title} \\
+by \\
+\@author \\[\baselineskip]}
+\par
+{\Large \bf Abstract}
+
+\par
+\end{center}}
+
+% You can use the committeepage environment to do it all yourself if you
+% don't want to use \makecommitteepage.  If the committeepage environment, the
+% paragraph skip is infinitely stretchable, so if you leave a blank line
+% between lines that you want space between, the space will stretch so
+% that the title page fills up the entire page.
+\def\committeepage{\newpage\centering
+  \thispagestyle{empty}
+  \parindent 0pt \parskip 10pt plus 1fil minus 1fil
+  \def\baselinestretch{1}\@normalsize\vbox to \vsize\bgroup\vbox to 9in\bgroup}
+% The \kern0pt pushes any depth into the height.  Thanks to Richard Stone.
+\def\endcommitteepage{\par\kern 0pt\egroup\vss\egroup\newpage}
+
+\def\titlepage{\newpage\centering
+  \thispagestyle{empty}
+  \parindent 0pt \parskip 12pt plus 1fil minus 1fil
+  \def\baselinestretch{1}\@normalsize\vbox to \vsize\bgroup\vbox to 9in\bgroup}
+\def\endtitlepage{\par\kern 0pt\egroup\vss\egroup\newpage}
+
+\def\CWRU{CASE WESTERN RESERVE UNIVERSITY}
+\def\cwru{Case Western Reserve University}
+
+\def\permission{\par\noindent{\centering
+  The author hereby grants to CWRU permission to reproduce and \\*
+  to distribute copies of this thesis document in whole or in part.}\par}
+
+\def\signature#1#2{\par\noindent#1\hrulefill\null\\* %\hrulefill or \dotfill
+  {\raggedleft #2\par}}
+
+\def\abstract{\subsection*{Abstract}\small\def\baselinestretch{1}\@normalsize}
+\def\endabstract{\par}
+
+% If using the report style, use - instead of . in the figure number.
+\@ifundefined{thechapter}{}{\def\thefigure{\thechapter-\arabic{figure}}}

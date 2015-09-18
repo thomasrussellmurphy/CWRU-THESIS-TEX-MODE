@@ -1,0 +1,87 @@
+
+\chapter{Make Index}
+\label{make-index}
+
+Making INDEX\index{index} for the document is really a mess. The steps
+are as follws:
+
+\begin {itemize}
+   \item label indices in the text files
+   \item insert a makeindex command in {\tt thesis.tex}
+   \item run {\tt thesis.tex} to generate {\tt thesis.ind}
+   \item remove makeindex command
+   \item run a third party program to make {\tt thesis.idx}
+   \item input {\tt thesis.idx} to {\tt thesis.tex}
+   \item run {\tt thesis.tex} to produce mighty {\bf INDEX} in the document.
+\end{itemize}
+\section{Now in Detail}
+
+I understand that you have read \cite[pp:77--79]{lamport86}.
+
+It is really important that you wait to prepare the index\index{index}
+until you are completely ready to print it on the nice 25\% cotton
+bond paper to submit to the graduate office. If you still have to add
+some text in the chapters or you have to add some figures the final
+output of page numbering may change, and that is why I recommend that
+you prepare the index in your leisure time.
+
+Labels are marked in the following way: if, for example, you need to
+add a word {\tt ``label''}\index{label} in the index, then you need to
+use the $backslash$index command after the apperance of the world {\tt
+``label''} in the text: {\tt label$\backslash$index\{label\}}.
+
+I would suggest you that don't mark index labels in the original
+document; rather, make a copy of all chapters in one file called {\tt
+all-chapters.tex}. The reason for this is that, if you have more than
+one chapter and you want to put index label for a word that is used in
+more than one chapter, then it will be time consuming to bring each
+chapter in the editor separately and adding labels. If you have all
+chapters in one temporary file, it is easier to give a command to
+change the word from {\tt xyz} to {\tt xyz$\backslash$index\{xyz\}}. I
+warn you not to do this with a global command because it may change
+some words which you don't want to be labeled. For example, suppose
+you want to put the word {\tt ``label''} in the index\index{index} for
+the following text:
+
+\begin{verse}
+{\tt Indexing is not really an easy job. It requires
+\underline{label}ing the words in the text. For \underline{label}ing
+you must have some motivation for \underline{label}ization your
+document. You need a lot of patients. Including global
+\underline{label} is harmful.}
+\end{verse}
+
+In the above example all underline words will be labeled. However,
+you may not want a index label on the segment of the word.
+
+Here are some steps I did for preparing an index on my document 
+	\cite{soomro94}.
+\begin{enumerate}
+   \item copy all chapters to a {\tt all-chapters-for-index.tex}\\
+	I did not copy all chapters to one file while preparing this document.
+   \item put index\index{index} labels in the file 
+		{\tt all-chapters-for-index.tex}
+   \item insert a command {\tt $\backslash$makeindex} or just remove\\
+	\% comment before it in the file thesis-sample.tex
+   \item put \% comment before all chapter inputs in your main thesis.tex\\
+	in this case thesis-sample.tex
+   \item add a command {\tt $\backslash$input all-chapters-for-index.tex}
+   \item run the thesis.tex throught \LaTeX
+   \item make sure that the {\tt thesis.idx} file is generated
+   \item remove {\tt $\backslash$makeindex} command or put a \% for comment 
+		before it in the {\tt thesis.tex} file
+   \item remove {\tt $\backslash$input all-chapters-for-index.tex}
+   \item remove comments sign \% before all chapter inputs in the
+		{\tt thesis.tex} file
+   \item using a third party program, which I have here as 
+		{\tt makeindex-sun.exe} and {\tt makeindex-sparc.exe}   
+   \item at prompt, type {\tt makeindex-sun.exe thesis.idx}\\
+		(You may ignore ``.idx'')
+   \item you should have the {\tt thesis.ind} file generated
+   \item go back to your {\tt thesis.tex} file and add 
+		{\tt $\backslash$input thesis.ind} before the
+	{\tt $\backslash$end\{document\}} command
+   \item you may edit {\tt thesis.ind} to make items or subitems as you wish
+   \item run {\tt thesis.tex} twice, or three times to be on the safe side
+   \item now you have index in your document
+\end{enumerate}

@@ -1,0 +1,92 @@
+\documentstyle[12pt,CWRU]{report}
+%\makeindex   % YOU WILL NEED THIS COMMAND TO MAKE A thesis.idx FILE.
+\input{preamble}
+\input psfig
+\begin{document}
+\bibliographystyle{plain} %\bibliographystyle{alpha}
+%
+%\beforepreface
+%\afterpreface
+%
+\newcommand {\singlespace}{\setlength{\baselineskip}{8pt}}
+\newcommand {\doublespace}{\setlength{\baselineskip}{20pt}}
+%
+\newenvironment {sitemize}
+ {\begin{itemize}
+ \singlespace}
+ {\end{itemize}}
+%
+\newenvironment {senumerate}
+ {\begin{enumerate}
+  \singlespace}
+ {\end{enumerate}}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{TESTABILITY INSERTION IN BIT-SLICE DATA PATH DESIGNS: 
+	A PSEUDO-EXHAUSTIVE BIST APPROACH}
+
+\author{RAHMAN A. SOOMRO}
+
+\department{Department of Computer Engineering and Science}
+%
+% IF THE THESIS IS FOR TWO DEGREES SIMULTANEOUSLY, LIST THEM BOTH
+% SEPARATED BY \and LIKE THIS:
+% \degree{Doctor of Philosophy \and Master of Science}
+%
+\degree{Doctor of Philosophy}
+%
+\thesisdate{August 18, 1993}
+\degreemonth{January}
+\degreeyear{1994}
+\majoradvisor{Dr. Christos A. Papachristou}
+%
+% --------------- begin committee information ----------------------------
+%
+% THE \committee COMMAND TAKES AN OPTIONAL ARGUMENT IN CASE YOU
+% WANT TO LABEL A PERSON OTHER THAN ``thesis committee''. FOR EXAMPLE:
+% \committee[Thesis Co-Advisor]{Dr. Default}{Professor, Department of Computer \& Science}
+%
+\advisor{Dr. Christos A. Papachristou}{Professor, Department of Computer \& Science}
+%
+% IF COMMITTEE CHAIR IS NOT THE THESIS ADVISOR, don't WRITE
+% <\\Thesis Advisor> AFTER THE CHAIR NAME, IN MY CASE IS SHOWN BELOW:
+%
+\committeechair{Dr. Christos A. Papachristou\\Thesis Advisor}
+  {Professor, Department of Computer Engineering \& Science}
+%
+%
+% IF THERE IS MORE THAN ONE COMMITTEE, USE THE \committee COMMAND
+% ONCE FOR EACH.
+%
+\committee{Dr. George Ernst}{Department of Computer Engineering \& Science}
+\committee{Dr. Frank Merat}{Department of Electrical Engineering}
+\committee{Dr. Sheldon Gruber}{Department of Electrical Engineering}
+\committee{Dr. Yoshiyasu Takefuji}{Department of Electrical Engineering}
+% --------------- end committee information ----------------------------
+\pagestyle{plain}
+\maketitlepage
+\makecommitteepage
+%------------------------
+  % IF YOU DON'T WANT TO INCLUDE THE COMMITTEE PAGE, MAKE 
+  % THE ABOVE COMMAND (\makecommitteepage) A COMMENT
+%------------------------
+\pagenumbering{roman}  % THE FOLLOWING 3 LINES ARE FOR ABSTRACT
+\setcounter{page}{2}   % IT IS REQUIRED THAT IT SHOULD START FORM
+\input abstract.tex    % ROMAN PAGE NUMBER 2.
+%
+\input dedication.tex
+\input acknowledgement.tex
+%
+\tableofcontents
+\listoffigures
+\pagestyle{plain}
+\listoftables
+%
+\input Chapter-1-introduction.tex
+\input Chapter-2-figures-in-latex.tex
+\input Chapter-3-bibliography.tex
+\input Chapter-4-make-index.tex
+%\input Appendix.tex
+\bibliography{thesis-sample}
+\input thesis-sample.ind
+\end{document}

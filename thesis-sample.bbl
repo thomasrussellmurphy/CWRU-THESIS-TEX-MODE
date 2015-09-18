@@ -1,0 +1,15 @@
+\begin{thebibliography}{1}
+
+\bibitem{lamport86}
+Leslie Lamport.
+\newblock {\em {\LaTeX: A Document Preparation System}}.
+\newblock Addison-Wesley Publishing Company, 1986.
+
+\bibitem{soomro94}
+Rahman~A. Soomro.
+\newblock {\em Testability Insertion in Bit-Slice Data Path Designs: A
+  Pseudo-Exhaustive BIST Approach}.
+\newblock PhD thesis, Case Western Reserve University, Cleveland, OH 44106,
+  January 1994.
+
+\end{thebibliography}
